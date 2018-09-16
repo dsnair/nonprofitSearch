@@ -2,8 +2,10 @@
   "name": "yelp-for-nonprofits",
   "version": "0.1.0",
   "private": true,
+  "hompage": "https://hackbit.github.io/reactriot2018-yelpfornonprofits/",
   "dependencies": {
     "@material-ui/core": "^3.0.3",
+    "gh-pages": "^2.0.0",
     "jsonfile": "^5.0.0",
     "lodash.keyby": "^4.6.0",
     "node-fetch": "^2.2.0",
@@ -15,6 +17,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   }
 }

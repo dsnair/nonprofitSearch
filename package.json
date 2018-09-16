@@ -2,7 +2,7 @@
   "name": "yelp-for-nonprofits",
   "version": "0.1.0",
   "private": true,
-  "hompage": "https://hackbit.github.io/reactriot2018-yelpfornonprofits/",
+  "homepage": "https://hackbit.github.io/reactriot2018-yelpfornonprofits/",
   "dependencies": {
     "@material-ui/core": "^3.0.3",
     "gh-pages": "^2.0.0",

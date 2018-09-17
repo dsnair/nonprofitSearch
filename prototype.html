@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yelp for Nonprofits</title>
+  <style>
+  #map {
+    height: 500px;
+    width: 75%;
+  }
+  </style>
+</head>
+<body>
+  <div id="data"></div>
+  <div id="coords"></div>
+  <div id="map"></div>
+
+  <!-- fetch nonprofits data -->
+  <script>
+    fetch("https://api.data.charitynavigator.org/v2/Organizations?app_id=38f9f556&app_key=d79dd1ad7b20120353f5874ed6cd13d2&search=greatschools")
+    .then(response => response.json())
+    .then(data =>
+      document.getElementById("data").innerHTML = JSON.stringify(data[0]))
+    .catch(error => console.log(error))
+  </script>
+
+  <!-- convert street address to coordinates -->
+  <script>
+  fetch("https://maps.googleapis.com/maps/api/geocode/json?address=1999+Harrison+Street,+Oakland,+CA&key=AIzaSyDIHtFTYSqg9qoqi-Bn8fLUjIH02sC5ddU")
+    .then(response => response.json())
+    .then(data =>
+      document.getElementById("coords").innerHTML = JSON.stringify(data.results[0].geometry.location))
+    .catch(error => console.log(error))
+  </script>
+
+  <!-- set up Google Map -->
+  <script>
+    function myMap() {
+      var options = {
+        zoom: 14,
+        center: {lat: 37.8044, lng: -122.2711}  // load initial location
+      }
+      var map = new google.maps.Map(document.getElementById('map'), options);
+      var marker = new google.maps.Marker({
+        // position where marker is placed
+        position: {lat: 37.8078456, lng: -122.2650786},
+        map: map  // map where marker is placed
+      });
+    }
+  </script>
+
+  <!-- load Google Map -->
+  <script async defer
+
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIHtFTYSqg9qoqi-Bn8fLUjIH02sC5ddU&callback=myMap">
+  </script>
+
+</body>
+</html>

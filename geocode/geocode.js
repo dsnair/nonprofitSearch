@@ -1,10 +1,9 @@
 const fetch = require("node-fetch");
-const keyBy = require("lodash.keyby");
 const jsonfile = require("jsonfile");
 
 const city = "Oakland";
 const state = "CA";
-const pageSize = 5;
+const pageSize = 10;
 
 // API Keys
 const cnKey = "d79dd1ad7b20120353f5874ed6cd13d2";
@@ -45,7 +44,7 @@ const geocode = async () => {
   try {
     const nonprofits = await fetchData(cnURL);
     const coords = await getCoords(nonprofits);
-    jsonfile.writeFile("geocode.json", keyBy(coords, "ein"), {
+    jsonfile.writeFile("../public/geocode.json", coords, {
       spaces: 2,
       EOL: "\r\n"
     });

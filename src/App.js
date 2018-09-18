@@ -16,30 +16,17 @@ const CN_URL = `https://api.data.charitynavigator.org/v2/Organizations?app_id=${
 class App extends React.Component {
   state = {
     response: {},
-    coords: [
-      {
-        ein: "010570536",
-        lat: 37.8043637,
-        lng: -122.2711137
-      },
-      {
-        ein: "010579792",
-        lat: 37.8343129,
-        lng: -122.2362901
-      }
-    ],
-    error: false
+    coords: []
   };
 
-  // componentDidMount() {
-  //   const readFile = async file => {
-  //     const request = await fetch(file);
-  //     const fileContents = await request.text();
-  //     this.setState({ coords: fileContents });
-  //     console.log("STATE", this.state.coords);
-  //   };
-  //   readFile("geocode.txt");
-  // }
+  componentDidMount() {
+    const readFile = async file => {
+      const request = await fetch(file);
+      const fileContents = await request.json();
+      this.setState({ coords: fileContents });
+    };
+    readFile("geocode.json");
+  }
 
   handleClick = async event => {
     event.preventDefault();
@@ -56,6 +43,8 @@ class App extends React.Component {
   };
 
   render() {
+    console.log("STATE", this.state.coords);
+
     return (
       <React.Fragment>
         <Form onClick={this.handleClick} />

@@ -1,14 +1,13 @@
 {
-  "name": "yelp-for-nonprofits",
+  "name": "nonprofitSearch",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://hackbit.github.io/reactriot2018-yelpfornonprofits/",
+  "homepage": "https://dsnair.github.io/nonprofitSearch/",
   "dependencies": {
     "@material-ui/core": "^3.0.3",
     "gh-pages": "^2.0.0",
     "jsonfile": "^5.0.0",
     "lodash": "^4.17.11",
-    "lodash.keyby": "^4.6.0",
     "node-fetch": "^2.2.0",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",

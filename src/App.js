@@ -1,9 +1,10 @@
 import React from "react";
-import isEmpty from "lodash/isEmpty";
+import { startCase, toLower, isEmpty } from "lodash";
 
 import "./App.css";
 import MyMap from "./MyMap";
 import Form from "./Form";
+import Orgs from "./Orgs";
 
 const CITY = "Oakland";
 const STATE = "CA";
@@ -35,11 +36,12 @@ class App extends React.Component {
       const request = await fetch(CN_URL);
       const response = await request.json();
       const nonprofits = response.map(org => ({
-        name: org.charityName,
+        name: startCase(toLower(org.charityName)),
         ein: org.ein,
-        classification: org.irsClassification.classification,
-        cause: org.irsClassification.nteeType,
-        street: org.mailingAddress.streetAddress1,
+        category: startCase(toLower(org.irsClassification.classification)),
+        cause: startCase(toLower(org.irsClassification.nteeType)),
+        street: startCase(toLower(org.mailingAddress.streetAddress1)),
+        city: startCase(toLower(org.mailingAddress.city)),
         state: org.mailingAddress.stateOrProvince,
         zipcode: org.mailingAddress.postalCode,
         website: org.websiteURL
@@ -59,6 +61,7 @@ class App extends React.Component {
       <React.Fragment>
         <Form onClick={this.handleClick} />
         {!isEmpty(this.state.orgs) && <MyMap coords={this.state.coords} />}
+        {!isEmpty(this.state.orgs) && <Orgs orgs={this.state.orgs} />}
       </React.Fragment>
     );
   }

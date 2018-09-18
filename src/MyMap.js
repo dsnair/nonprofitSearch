@@ -14,7 +14,7 @@ const MyMap = compose(
   withProps({
     googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${G_API_KEY}&v=3.exp`,
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `800px`, width: `800px` }} />,
+    containerElement: <div style={{ height: `500px`, width: `500px` }} />,
     mapElement: <div style={{ height: `100%` }} />
   }),
   withHandlers({

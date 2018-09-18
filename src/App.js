@@ -15,8 +15,9 @@ const CN_URL = `https://api.data.charitynavigator.org/v2/Organizations?app_id=${
 
 class App extends React.Component {
   state = {
-    response: {},
-    coords: []
+    orgs: [],
+    coords: [],
+    error: false
   };
 
   componentDidMount() {
@@ -33,9 +34,20 @@ class App extends React.Component {
     try {
       const request = await fetch(CN_URL);
       const response = await request.json();
+      const nonprofits = response.map(org => ({
+        name: org.charityName,
+        ein: org.ein,
+        classification: org.irsClassification.classification,
+        cause: org.irsClassification.nteeType,
+        street: org.mailingAddress.streetAddress1,
+        state: org.mailingAddress.stateOrProvince,
+        zipcode: org.mailingAddress.postalCode,
+        website: org.websiteURL
+      }));
       this.setState({
-        response,
-        error: false
+        orgs: nonprofits,
+        error: false,
+        response
       });
     } catch (error) {
       this.setState({ error: true });
@@ -43,12 +55,10 @@ class App extends React.Component {
   };
 
   render() {
-    console.log("STATE", this.state.coords);
-
     return (
       <React.Fragment>
         <Form onClick={this.handleClick} />
-        {!isEmpty(this.state.response) && <MyMap coords={this.state.coords} />}
+        {!isEmpty(this.state.orgs) && <MyMap coords={this.state.coords} />}
       </React.Fragment>
     );
   }
